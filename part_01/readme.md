@@ -1,43 +1,60 @@
-# Part 1
+## Introduction 
 
-Due: October 27, 2017
+For my capstone project I used the cDiscount product catalog from kaggle to build an image recognition model using Keras Convoluted Neural Networks libraries. 
 
-## Overview
+The data for this project was massive (58GB) and consisted of over 7 million distinct pictures, which could be classified into 5720 distinct categories. This data was too large to be classified on a non-GPU computer in an efficient manner. 
 
-In this section, you will be presenting three potential topics to your coursemates (and fellow well-wishers!) You will be presenting your findings in the form of a [lightning talk](https://en.wikipedia.org/wiki/Lightning_talk). 
+As such, I created two smaller datasets, containing five categories each. I refer to these two sets as samples throughout my notebooks. I then built two CNN models to gain a better understanding of how these algorithms work. 
 
-#### Your Slides Must Be on Google Slides. No Exceptions!
 
-## What is a lightning talk?
+The first sample was comprised of objects that were all similar to each other; I refer to the files dealing with this first sample as Wine. 
 
-For our purposes, a lightning talk is a talk lasting **no more than five minutes**, in which you will discuss the following about your three proposed projects:
+The five categories for this sample were: 
 
-1. What your ultimate question is (i.e., what do you want to predict about the world?)
-2. Why should we care / why do _you_ care? 
-3. What data do you have available to answer it? What do you have in hand?
+- Whiskey  
+- Red Wine
+- White Wine
+- Rose
+- Champagne
 
-Time limits will be strictly enforced -- you will get a warning at 1 minute, however.
+The second set of items I selected were all different. I wanted to see if there was a noticeable difference in how the model performed when there were visually more distinct differences to train on. I refer to this second set as Mixed Bag or MB throughout my notebooks. 
 
-We will expect that you have a slide deck of some kind -- using Google Slides is _highly_ encouraged, however.
+The five categories for this sample were
 
-## Expectations
+- Photography Books 
+- Auto Fuses
+- Hinges
+- Lotion 
+- Bed Headboards
 
-1. A slide deck and talk that answers the three questions about your proposed projects outlined above
-2. The ability to intelligently answer any reasonable question about your project or data 
+Both test sets were 7916 items (roughly 0.1% of the total database). I picked these items because they had almost the same number of items per category. In keeping these characteristics of my data "constant" I hoped to isolate the variables I was testing. 
 
-## Recommendations
+## Notebooks, Data Cleaning, and Modeling 
 
-Practice your talk beforehand! Talking in front of people takes a large amount of skill and distilling hours of work into no more than five minutes is even more difficult. 
 
-Ruthlessly cut your presentation down to whatever facts need to be in front of your audience -- there will be (many) things that are very nice for your audience to know or that may be the subject of their questions. Cut your scheduled presentation to as small of a time as you can, but feel free to include additional slides at the end of your deck in preparation for any likely questions. 
+To jump from the EDA to different sections of my capstone, you can use the links below: 
 
-Bolded and capitalized for as much effect as possible:
+[II. Wine Data Pipeline an Generator  ](II. Wine - Data Pipeline and Generator - Final.ipynb).
 
-#### HAVE YOUR DATA IN HAND AS SOON AS POSSIBLE
+[II. MB Data Pipeline an Generator  ](II. MB Data Pipeline and Generator - Final.ipynb).
 
-There is no penalty for having to switch topics or datasets in the middle of the project, provided that you can still deliver on the other portions of this work. However, if you can get the data in hand as soon as possible, you can prevent yourself a lot of extra work. 
+During the Data Generation, the items were converted to categorical numbers before they were loaded into the final model pipeline. Because of the requirements of Neural Nets to have distinct shapes of the input data it was creating an error when I tried to convert them back to create the confusion matrix. Luckily, this could be remedied by using a separate pandas dataframe that had the category and product ids (but not the picture data). It was easier to get the information I needed, which is what the fixed Y-vales shows. 
 
-## Deliverables
+I have commented out the to-categorical lines in the main pipelines, but these Fixed Y-Values files should still be run, as its the arrays saved out of them that are loaded into my final models. 
 
-1. Your presentation (on time!) on October 27, 2017
-2. A Google Slides presentation (your presentation **must** be hosted on Google Slides. No Exceptions!)
+[III. Wine Fixed Y-Values ](Wine Fixed Y-Values - Final.ipynb).
+
+[III. MB Fixed Y-Values ](III. MB Fixed Y-Values - Final.ipynb).
+
+
+The model notebooks:
+
+
+[IV. Wine Model and Analysis ](IV. Wine Model and Analysis - Final.ipynb).
+
+[IV. MB Model and Analysis ](IV. MB Model and Analysis - Final.ipynb).
+
+
+In addition, here is the link to my notebook from part two, which illustrates working with the BSON file type and extracting the images. The insights from this notebook were what I used in the data generators and pipelines. 
+
+[Exploring Image Files and BSON](Exploring Image Files and BSON.ipynb).
